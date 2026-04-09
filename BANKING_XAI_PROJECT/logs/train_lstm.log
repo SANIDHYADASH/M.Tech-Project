@@ -1,0 +1,111 @@
+[2026-04-09 01:51:14,191] [phase2.train_lstm] [INFO] Splitting sequence data into train and validation sets
+[2026-04-09 01:51:14,199] [phase2.train_lstm] [INFO] X_train shape: (7995, 6, 50)
+[2026-04-09 01:51:14,200] [phase2.train_lstm] [INFO] X_val shape: (1999, 6, 50)
+[2026-04-09 01:51:14,241] [phase2.train_lstm] [INFO] Starting LSTM training
+[2026-04-09 01:51:39,362] [phase2.train_lstm] [INFO] Generating validation predictions
+[2026-04-09 01:51:39,699] [phase2.train_lstm] [INFO] LSTM Validation Metrics: {'accuracy': 0.9819909954977488, 'recall': 0.0, 'precision': 0.0, 'auc': 0.4264023320314711}
+[2026-04-09 01:51:39,709] [phase2.train_lstm] [INFO] Saved LSTM model to models/lstm_model.h5
+[2026-04-09 10:36:58,056] [phase2.train_lstm] [INFO] Splitting sequence data into train and validation sets
+[2026-04-09 10:36:58,063] [phase2.train_lstm] [INFO] X_train shape: (7995, 6, 50)
+[2026-04-09 10:36:58,063] [phase2.train_lstm] [INFO] X_val shape: (1999, 6, 50)
+[2026-04-09 10:36:58,122] [phase2.train_lstm] [INFO] Starting LSTM training
+[2026-04-09 10:37:22,363] [phase2.train_lstm] [INFO] Generating validation predictions
+[2026-04-09 10:37:22,691] [phase2.train_lstm] [INFO] LSTM Validation Metrics: {'accuracy': 0.9819909954977488, 'recall': 0.0, 'precision': 0.0, 'auc': 0.5042452029206996}
+[2026-04-09 10:37:22,705] [phase2.train_lstm] [INFO] Saved LSTM model to models/lstm_model.h5
+[2026-04-09 11:05:21,991] [phase2.train_lstm] [INFO] Splitting sequence data into train and validation sets
+[2026-04-09 11:05:21,998] [phase2.train_lstm] [INFO] X_train shape: (7995, 6, 50)
+[2026-04-09 11:05:21,998] [phase2.train_lstm] [INFO] X_val shape: (1999, 6, 50)
+[2026-04-09 11:05:21,999] [phase2.train_lstm] [INFO] Computing class weights
+[2026-04-09 11:05:21,999] [phase2.train_lstm] [INFO] Using class weights: {0: np.float64(0.5090411307780466), 1: np.float64(28.151408450704224)}
+[2026-04-09 11:05:22,057] [phase2.train_lstm] [INFO] Starting LSTM training
+[2026-04-09 11:05:46,866] [phase2.train_lstm] [INFO] Generating validation predictions
+[2026-04-09 11:05:47,199] [phase2.train_lstm] [INFO] Using prediction threshold = 0.2
+[2026-04-09 11:05:47,199] [phase2.train_lstm] [INFO] Prediction probability stats -> Min: 0.4725, Max: 0.5428, Mean: 0.5224
+[2026-04-09 11:05:47,204] [phase2.train_lstm] [INFO] LSTM Validation Metrics: {'accuracy': 0.018009004502251125, 'recall': 1.0, 'precision': 0.018009004502251125, 'auc': 0.47141563366728934, 'f1_score': 0.03538083538083538}
+[2026-04-09 11:05:47,204] [phase2.train_lstm] [INFO] Confusion Matrix:
+[[   0 1963]
+ [   0   36]]
+[2026-04-09 11:05:47,204] [phase2.train_lstm] [INFO] Predicted positives: 1999
+[2026-04-09 11:05:47,204] [phase2.train_lstm] [INFO] Actual positives: 36
+[2026-04-09 11:05:47,225] [phase2.train_lstm] [INFO] Saved LSTM model to models/lstm_model.keras
+[2026-04-09 11:40:12,865] [phase2.train_lstm] [INFO] Splitting sequence data into train and validation sets
+[2026-04-09 11:40:12,872] [phase2.train_lstm] [INFO] X_train shape: (7995, 6, 50)
+[2026-04-09 11:40:12,873] [phase2.train_lstm] [INFO] X_val shape: (1999, 6, 50)
+[2026-04-09 11:40:12,873] [phase2.train_lstm] [INFO] Computing class weights
+[2026-04-09 11:40:12,874] [phase2.train_lstm] [INFO] Using class weights: {0: np.float64(0.5090411307780466), 1: np.float64(28.151408450704224)}
+[2026-04-09 11:40:12,932] [phase2.train_lstm] [INFO] Starting LSTM training
+[2026-04-09 11:40:37,586] [phase2.train_lstm] [INFO] Generating validation predictions
+[2026-04-09 11:40:37,916] [phase2.train_lstm] [INFO] Threshold=0.5 | Predicted Positives=1407
+[2026-04-09 11:40:37,916] [phase2.train_lstm] [INFO] Threshold=0.51 | Predicted Positives=1144
+[2026-04-09 11:40:37,916] [phase2.train_lstm] [INFO] Threshold=0.52 | Predicted Positives=668
+[2026-04-09 11:40:37,916] [phase2.train_lstm] [INFO] Threshold=0.53 | Predicted Positives=331
+[2026-04-09 11:40:37,916] [phase2.train_lstm] [INFO] Threshold=0.54 | Predicted Positives=79
+[2026-04-09 11:40:37,916] [phase2.train_lstm] [INFO] Using prediction threshold = 0.52
+[2026-04-09 11:40:37,916] [phase2.train_lstm] [INFO] Prediction probability stats -> Min: 0.2710, Max: 0.5731, Mean: 0.5067
+[2026-04-09 11:40:37,921] [phase2.train_lstm] [INFO] LSTM Validation Metrics: {'accuracy': 0.6568284142071036, 'recall': 0.25, 'precision': 0.01347305389221557, 'auc': 0.47277409860191316, 'f1_score': 0.02556818181818182}
+[2026-04-09 11:40:37,921] [phase2.train_lstm] [INFO] Confusion Matrix:
+[[1304  659]
+ [  27    9]]
+[2026-04-09 11:40:37,921] [phase2.train_lstm] [INFO] Predicted positives: 668
+[2026-04-09 11:40:37,921] [phase2.train_lstm] [INFO] Actual positives: 36
+[2026-04-09 11:40:37,940] [phase2.train_lstm] [INFO] Saved LSTM model to models/lstm_model.keras
+[2026-04-09 12:19:31,404] [phase2.train_lstm] [INFO] Splitting sequence data into train and validation sets
+[2026-04-09 12:19:31,410] [phase2.train_lstm] [INFO] X_train shape: (7995, 6, 53)
+[2026-04-09 12:19:31,410] [phase2.train_lstm] [INFO] X_val shape: (1999, 6, 53)
+[2026-04-09 12:19:31,410] [phase2.train_lstm] [INFO] Computing class weights
+[2026-04-09 12:19:31,412] [phase2.train_lstm] [INFO] Using class weights: {0: np.float64(222.08333333333334), 1: np.float64(0.17778519012675117)}
+[2026-04-09 12:19:31,470] [phase2.train_lstm] [INFO] Starting LSTM training
+[2026-04-09 13:06:54,034] [phase2.train_lstm] [INFO] Splitting sequence data into train and validation sets
+[2026-04-09 13:06:54,040] [phase2.train_lstm] [INFO] X_train shape: (7995, 6, 53)
+[2026-04-09 13:06:54,040] [phase2.train_lstm] [INFO] X_val shape: (1999, 6, 53)
+[2026-04-09 13:06:54,040] [phase2.train_lstm] [INFO] Computing class weights
+[2026-04-09 13:06:54,040] [phase2.train_lstm] [INFO] Using class weights: {0: 1.0, 1: 0.0}
+[2026-04-09 13:06:54,040] [phase2.train_lstm] [INFO] Using class weights: {0: 1.0, 1: 0.0}
+[2026-04-09 13:06:54,080] [phase2.train_lstm] [INFO] Starting LSTM training
+[2026-04-09 13:11:46,931] [phase2.train_lstm] [INFO] Splitting sequence data into train and validation sets
+[2026-04-09 16:32:34,058] [phase2.train_lstm] [INFO] Splitting sequence data into train and validation sets
+[2026-04-09 16:32:34,064] [phase2.train_lstm] [INFO] X_train shape: (7995, 6, 50)
+[2026-04-09 16:32:34,064] [phase2.train_lstm] [INFO] X_val shape: (1999, 6, 50)
+[2026-04-09 16:32:34,064] [phase2.train_lstm] [INFO] Computing class weights
+[2026-04-09 16:32:34,064] [phase2.train_lstm] [INFO] Negative samples: 7853
+[2026-04-09 16:32:34,064] [phase2.train_lstm] [INFO] Positive samples: 142
+[2026-04-09 16:32:34,064] [phase2.train_lstm] [INFO] Using class weights: {0: 1.0, 1: 55.30281690140845}
+[2026-04-09 16:32:34,126] [phase2.train_lstm] [INFO] Starting LSTM training
+[2026-04-09 16:32:59,186] [phase2.train_lstm] [INFO] Generating validation predictions
+[2026-04-09 16:32:59,547] [phase2.train_lstm] [INFO] Threshold=0.5 | Predicted Positives=61
+[2026-04-09 16:32:59,547] [phase2.train_lstm] [INFO] Threshold=0.51 | Predicted Positives=22
+[2026-04-09 16:32:59,547] [phase2.train_lstm] [INFO] Threshold=0.52 | Predicted Positives=9
+[2026-04-09 16:32:59,547] [phase2.train_lstm] [INFO] Threshold=0.53 | Predicted Positives=3
+[2026-04-09 16:32:59,547] [phase2.train_lstm] [INFO] Threshold=0.54 | Predicted Positives=1
+[2026-04-09 16:32:59,547] [phase2.train_lstm] [INFO] Using prediction threshold = 0.52
+[2026-04-09 16:32:59,547] [phase2.train_lstm] [INFO] Prediction probability stats -> Min: 0.2413, Max: 0.5443, Mean: 0.4836
+[2026-04-09 16:32:59,551] [phase2.train_lstm] [INFO] LSTM Validation Metrics: {'accuracy': 0.9774887443721861, 'recall': 0.0, 'precision': 0.0, 'auc': 0.423671251485821, 'f1_score': 0.0}
+[2026-04-09 16:32:59,551] [phase2.train_lstm] [INFO] Confusion Matrix:
+[[1954    9]
+ [  36    0]]
+[2026-04-09 16:32:59,551] [phase2.train_lstm] [INFO] Predicted positives: 9
+[2026-04-09 16:32:59,551] [phase2.train_lstm] [INFO] Actual positives: 36
+[2026-04-09 16:32:59,571] [phase2.train_lstm] [INFO] Saved LSTM model to models/lstm_model.keras
+[2026-04-09 17:10:51,780] [phase2.train_lstm] [INFO] Splitting sequence data into train and validation sets
+[2026-04-09 17:10:51,783] [phase2.train_lstm] [INFO] X_train shape: (3995, 6, 50)
+[2026-04-09 17:10:51,783] [phase2.train_lstm] [INFO] X_val shape: (999, 6, 50)
+[2026-04-09 17:10:51,783] [phase2.train_lstm] [INFO] Computing class weights
+[2026-04-09 17:10:51,783] [phase2.train_lstm] [INFO] Negative samples: 3416
+[2026-04-09 17:10:51,784] [phase2.train_lstm] [INFO] Positive samples: 579
+[2026-04-09 17:10:51,784] [phase2.train_lstm] [INFO] Using class weights: {0: 1.0, 1: 5.899827288428325}
+[2026-04-09 17:10:51,841] [phase2.train_lstm] [INFO] Starting LSTM training
+[2026-04-09 17:11:05,744] [phase2.train_lstm] [INFO] Generating validation predictions
+[2026-04-09 17:11:06,062] [phase2.train_lstm] [INFO] Threshold=0.5 | Predicted Positives=694
+[2026-04-09 17:11:06,062] [phase2.train_lstm] [INFO] Threshold=0.51 | Predicted Positives=584
+[2026-04-09 17:11:06,062] [phase2.train_lstm] [INFO] Threshold=0.52 | Predicted Positives=436
+[2026-04-09 17:11:06,062] [phase2.train_lstm] [INFO] Threshold=0.53 | Predicted Positives=317
+[2026-04-09 17:11:06,062] [phase2.train_lstm] [INFO] Threshold=0.54 | Predicted Positives=230
+[2026-04-09 17:11:06,062] [phase2.train_lstm] [INFO] Using prediction threshold = 0.52
+[2026-04-09 17:11:06,062] [phase2.train_lstm] [INFO] Prediction probability stats -> Min: 0.3810, Max: 0.6086, Mean: 0.5144
+[2026-04-09 17:11:06,065] [phase2.train_lstm] [INFO] LSTM Validation Metrics: {'accuracy': 0.5285285285285285, 'recall': 0.3793103448275862, 'precision': 0.12614678899082568, 'auc': 0.4708067511911491, 'f1_score': 0.18932874354561102}
+[2026-04-09 17:11:06,065] [phase2.train_lstm] [INFO] Confusion Matrix:
+[[473 381]
+ [ 90  55]]
+[2026-04-09 17:11:06,065] [phase2.train_lstm] [INFO] Predicted positives: 436
+[2026-04-09 17:11:06,065] [phase2.train_lstm] [INFO] Actual positives: 145
+[2026-04-09 17:11:06,082] [phase2.train_lstm] [INFO] Saved LSTM model to models/lstm_model.keras
