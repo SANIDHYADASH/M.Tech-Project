@@ -458,3 +458,59 @@ Charged Off             61
 [2026-04-09 17:10:51,770] [phase1.preprocessing] [INFO] Converting issue_month into date features
 [2026-04-09 17:10:51,775] [phase1.preprocessing] [INFO] Dropped 0 rows with missing target.
 [2026-04-09 17:10:51,775] [phase1.preprocessing] [INFO] Final cleaned dataframe shape: (5000, 62)
+[2026-04-09 17:41:03,162] [phase1.preprocessing] [INFO] Starting basic cleaning
+[2026-04-09 17:41:03,165] [phase1.preprocessing] [INFO] Loan status value counts BEFORE encoding:
+[2026-04-09 17:41:03,170] [phase1.preprocessing] [INFO] loan_status
+Current               3775
+Fully Paid             500
+Late (16-30 days)      495
+Late (31-120 days)     169
+Charged Off             61
+[2026-04-09 17:41:03,171] [phase1.preprocessing] [INFO] Loan status value counts AFTER encoding (0=good, 1=bad):
+[2026-04-09 17:41:03,172] [phase1.preprocessing] [INFO] loan_status
+0    4275
+1     725
+[2026-04-09 17:41:03,172] [phase1.preprocessing] [INFO] Dropping leakage columns: ['balance', 'paid_total', 'paid_principal', 'paid_interest', 'paid_late_fees']
+[2026-04-09 17:41:03,173] [phase1.preprocessing] [INFO] Dropping high-cardinality columns: ['emp_title']
+[2026-04-09 17:41:03,176] [phase1.preprocessing] [INFO] Converting issue_month into date features
+[2026-04-09 17:41:03,183] [phase1.preprocessing] [INFO] Dropped 0 rows with missing target.
+[2026-04-09 17:41:03,183] [phase1.preprocessing] [INFO] Final cleaned dataframe shape: (5000, 62)
+[2026-04-09 17:41:03,184] [phase1.preprocessing] [INFO] Features shape: (5000, 61), Target shape: (5000,)
+[2026-04-09 17:41:03,187] [phase1.preprocessing] [INFO] Train shape: (4000, 61), Test shape: (1000, 61)
+[2026-04-09 17:41:03,188] [phase1.preprocessing] [INFO] Numeric features: 50, Categorical features: 11
+[2026-04-09 17:41:03,188] [phase1.preprocessing] [INFO] Fitting preprocessor on training data
+[2026-04-09 17:41:03,234] [phase1.preprocessing] [INFO] Transformed Train shape: (4000, 135), Test shape: (1000, 135)
+[2026-04-09 17:41:07,473] [phase1.preprocessing] [INFO] Starting basic cleaning
+[2026-04-09 17:41:07,473] [phase1.preprocessing] [INFO] Loan status value counts BEFORE encoding:
+[2026-04-09 17:41:07,474] [phase1.preprocessing] [INFO] loan_status
+Current               3775
+Fully Paid             500
+Late (16-30 days)      495
+Late (31-120 days)     169
+Charged Off             61
+[2026-04-09 17:41:07,474] [phase1.preprocessing] [INFO] Loan status value counts AFTER encoding (0=good, 1=bad):
+[2026-04-09 17:41:07,474] [phase1.preprocessing] [INFO] loan_status
+0    4275
+1     725
+[2026-04-09 17:41:07,474] [phase1.preprocessing] [INFO] Dropping leakage columns: ['balance', 'paid_total', 'paid_principal', 'paid_interest', 'paid_late_fees']
+[2026-04-09 17:41:07,475] [phase1.preprocessing] [INFO] Dropping high-cardinality columns: ['emp_title']
+[2026-04-09 17:41:07,477] [phase1.preprocessing] [INFO] Converting issue_month into date features
+[2026-04-09 17:41:07,481] [phase1.preprocessing] [INFO] Dropped 0 rows with missing target.
+[2026-04-09 17:41:07,481] [phase1.preprocessing] [INFO] Final cleaned dataframe shape: (5000, 62)
+[2026-04-09 17:43:13,225] [phase1.preprocessing] [INFO] Starting basic cleaning
+[2026-04-09 17:43:13,227] [phase1.preprocessing] [INFO] Loan status value counts BEFORE encoding:
+[2026-04-09 17:43:13,228] [phase1.preprocessing] [INFO] loan_status
+Current               3775
+Fully Paid             500
+Late (16-30 days)      495
+Late (31-120 days)     169
+Charged Off             61
+[2026-04-09 17:43:13,228] [phase1.preprocessing] [INFO] Loan status value counts AFTER encoding (0=good, 1=bad):
+[2026-04-09 17:43:13,228] [phase1.preprocessing] [INFO] loan_status
+0    4275
+1     725
+[2026-04-09 17:43:13,228] [phase1.preprocessing] [INFO] Dropping leakage columns: ['balance', 'paid_total', 'paid_principal', 'paid_interest', 'paid_late_fees']
+[2026-04-09 17:43:13,229] [phase1.preprocessing] [INFO] Dropping high-cardinality columns: ['emp_title']
+[2026-04-09 17:43:13,231] [phase1.preprocessing] [INFO] Converting issue_month into date features
+[2026-04-09 17:43:13,238] [phase1.preprocessing] [INFO] Dropped 0 rows with missing target.
+[2026-04-09 17:43:13,238] [phase1.preprocessing] [INFO] Final cleaned dataframe shape: (5000, 62)

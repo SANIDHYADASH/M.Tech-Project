@@ -193,3 +193,16 @@ weighted avg       0.91      0.79      0.82      1000
 [2026-04-09 17:10:50,086] [phase1.evaluate_model] [INFO] Confusion matrix:
 [[648 207]
  [  3 142]]
+[2026-04-09 17:41:05,761] [phase1.evaluate_model] [INFO] Classification report:
+              precision    recall  f1-score   support
+
+           0       1.00      0.76      0.86       855
+           1       0.41      0.98      0.57       145
+
+    accuracy                           0.79      1000
+   macro avg       0.70      0.87      0.72      1000
+weighted avg       0.91      0.79      0.82      1000
+
+[2026-04-09 17:41:05,761] [phase1.evaluate_model] [INFO] Confusion matrix:
+[[648 207]
+ [  3 142]]

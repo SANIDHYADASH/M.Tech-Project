@@ -9,6 +9,7 @@ from phase1.train_model import train_xgboost
 from phase1.evaluate_model import detailed_evaluation
 from phase1.explainability_shap import compute_shap_values
 from utils.logging_utils import get_logger
+import joblib
 
 logger = get_logger(__name__, log_file="main_pipeline.log")
 
@@ -52,7 +53,7 @@ def run_phase1():
     compute_shap_values(model, X_test_for_shap, feature_names=feature_names)
 
     logger.info("==== Phase-1 Pipeline completed successfully ====")
-
+    joblib.dump(preprocessor, "artifacts/preprocessor.joblib")
     # Return objects for Phase-2 integration
     return {
         "df": df_fe,

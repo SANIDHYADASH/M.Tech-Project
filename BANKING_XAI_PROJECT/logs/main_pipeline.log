@@ -100,3 +100,14 @@
 [2026-04-09 17:10:51,764] [__main__] [INFO] ========== STARTING PHASE-2 ==========
 [2026-04-09 17:11:06,082] [__main__] [INFO] ========== PHASE-2 COMPLETED ==========
 [2026-04-09 17:11:06,082] [__main__] [INFO] ========== COMPLETE BANKING XAI PIPELINE COMPLETED SUCCESSFULLY ==========
+[2026-04-09 17:41:03,127] [__main__] [INFO] ========== STARTING COMPLETE BANKING XAI PIPELINE ==========
+[2026-04-09 17:41:03,127] [__main__] [INFO] ========== STARTING PHASE-1 ==========
+[2026-04-09 17:41:03,127] [phase1.phase1_pipeline] [INFO] ==== Starting Phase-1 Banking XAI Pipeline ====
+[2026-04-09 17:41:05,758] [phase1.phase1_pipeline] [INFO] Using evaluation threshold = 0.05
+[2026-04-09 17:41:05,761] [phase1.phase1_pipeline] [INFO] Final validation metrics: {'accuracy': 0.827, 'auc': 0.9162008469449486, 'recall': 0.903448275862069, 'precision': 0.4517241379310345, 'f1_score': 0.6022988505747127}
+[2026-04-09 17:41:05,761] [phase1.phase1_pipeline] [INFO] Confusion matrix stats: {'tn': 648, 'fp': 207, 'fn': 3, 'tp': 142}
+[2026-04-09 17:41:07,470] [phase1.phase1_pipeline] [INFO] ==== Phase-1 Pipeline completed successfully ====
+[2026-04-09 17:41:07,472] [__main__] [INFO] ========== PHASE-1 COMPLETED ==========
+[2026-04-09 17:41:07,473] [__main__] [INFO] ========== STARTING PHASE-2 ==========
+[2026-04-09 17:41:22,117] [__main__] [INFO] ========== PHASE-2 COMPLETED ==========
+[2026-04-09 17:41:22,117] [__main__] [INFO] ========== COMPLETE BANKING XAI PIPELINE COMPLETED SUCCESSFULLY ==========

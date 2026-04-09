@@ -148,3 +148,13 @@
 [2026-04-09 17:10:51,522] [phase1.explainability_shap] [INFO] Saved SHAP force plot for sample 3 to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/shap_force_3.png
 [2026-04-09 17:10:51,698] [phase1.explainability_shap] [INFO] Saved SHAP force plot for sample 4 to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/shap_force_4.png
 [2026-04-09 17:10:51,764] [phase1.explainability_shap] [INFO] Saved SHAP explainer to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/shap_explainer.joblib
+[2026-04-09 17:41:05,762] [phase1.explainability_shap] [INFO] Initializing SHAP TreeExplainer
+[2026-04-09 17:41:05,804] [phase1.explainability_shap] [INFO] Sampling test data for SHAP
+[2026-04-09 17:41:05,804] [phase1.explainability_shap] [INFO] Computing SHAP values for 1000 samples
+[2026-04-09 17:41:06,547] [phase1.explainability_shap] [INFO] Saved SHAP summary plot to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/shap_summary.png
+[2026-04-09 17:41:06,733] [phase1.explainability_shap] [INFO] Saved SHAP force plot for sample 0 to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/shap_force_0.png
+[2026-04-09 17:41:06,913] [phase1.explainability_shap] [INFO] Saved SHAP force plot for sample 1 to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/shap_force_1.png
+[2026-04-09 17:41:07,072] [phase1.explainability_shap] [INFO] Saved SHAP force plot for sample 2 to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/shap_force_2.png
+[2026-04-09 17:41:07,228] [phase1.explainability_shap] [INFO] Saved SHAP force plot for sample 3 to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/shap_force_3.png
+[2026-04-09 17:41:07,402] [phase1.explainability_shap] [INFO] Saved SHAP force plot for sample 4 to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/shap_force_4.png
+[2026-04-09 17:41:07,470] [phase1.explainability_shap] [INFO] Saved SHAP explainer to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/shap_explainer.joblib

@@ -237,3 +237,29 @@
 [2026-04-09 17:10:47,482] [phase1.feature_engineering] [INFO] Creating feature: bankruptcy_or_tax_issue
 [2026-04-09 17:10:47,482] [phase1.feature_engineering] [INFO] Creating feature: recent_inquiry_risk
 [2026-04-09 17:10:47,482] [phase1.feature_engineering] [INFO] Feature engineering completed. Final shape: (5000, 66)
+[2026-04-09 17:41:03,147] [phase1.feature_engineering] [INFO] Adding domain-specific features
+[2026-04-09 17:41:03,151] [phase1.feature_engineering] [INFO] Creating feature: emi_to_income_ratio
+[2026-04-09 17:41:03,154] [phase1.feature_engineering] [INFO] Creating feature: total_credit_utilization_ratio
+[2026-04-09 17:41:03,154] [phase1.feature_engineering] [INFO] Creating feature: avg_debit_limit_per_active_account
+[2026-04-09 17:41:03,155] [phase1.feature_engineering] [INFO] Creating feature: credit_history_length_years
+[2026-04-09 17:41:03,158] [phase1.feature_engineering] [INFO] Creating feature: high_dti_flag
+[2026-04-09 17:41:03,159] [phase1.feature_engineering] [INFO] Creating feature: open_credit_ratio
+[2026-04-09 17:41:03,159] [phase1.feature_engineering] [INFO] Creating feature: cc_carrying_balance_ratio
+[2026-04-09 17:41:03,160] [phase1.feature_engineering] [INFO] Creating feature: installment_burden_ratio
+[2026-04-09 17:41:03,160] [phase1.feature_engineering] [INFO] Creating feature: delinquency_score
+[2026-04-09 17:41:03,160] [phase1.feature_engineering] [INFO] Creating feature: bankruptcy_or_tax_issue
+[2026-04-09 17:41:03,161] [phase1.feature_engineering] [INFO] Creating feature: recent_inquiry_risk
+[2026-04-09 17:41:03,161] [phase1.feature_engineering] [INFO] Feature engineering completed. Final shape: (5000, 66)
+[2026-04-09 17:43:13,212] [phase1.feature_engineering] [INFO] Adding domain-specific features
+[2026-04-09 17:43:13,216] [phase1.feature_engineering] [INFO] Creating feature: emi_to_income_ratio
+[2026-04-09 17:43:13,217] [phase1.feature_engineering] [INFO] Creating feature: total_credit_utilization_ratio
+[2026-04-09 17:43:13,217] [phase1.feature_engineering] [INFO] Creating feature: avg_debit_limit_per_active_account
+[2026-04-09 17:43:13,217] [phase1.feature_engineering] [INFO] Creating feature: credit_history_length_years
+[2026-04-09 17:43:13,222] [phase1.feature_engineering] [INFO] Creating feature: high_dti_flag
+[2026-04-09 17:43:13,222] [phase1.feature_engineering] [INFO] Creating feature: open_credit_ratio
+[2026-04-09 17:43:13,223] [phase1.feature_engineering] [INFO] Creating feature: cc_carrying_balance_ratio
+[2026-04-09 17:43:13,223] [phase1.feature_engineering] [INFO] Creating feature: installment_burden_ratio
+[2026-04-09 17:43:13,224] [phase1.feature_engineering] [INFO] Creating feature: delinquency_score
+[2026-04-09 17:43:13,224] [phase1.feature_engineering] [INFO] Creating feature: bankruptcy_or_tax_issue
+[2026-04-09 17:43:13,224] [phase1.feature_engineering] [INFO] Creating feature: recent_inquiry_risk
+[2026-04-09 17:43:13,225] [phase1.feature_engineering] [INFO] Feature engineering completed. Final shape: (5000, 66)

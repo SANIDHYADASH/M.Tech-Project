@@ -151,3 +151,14 @@
 [[696 159]
  [ 14 131]]
 [2026-04-09 17:10:50,081] [phase1.train_model] [INFO] Saved model to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/xgboost_model.joblib
+[2026-04-09 17:41:03,234] [phase1.train_model] [INFO] Training class distribution -> Negative: 3420, Positive: 580
+[2026-04-09 17:41:03,234] [phase1.train_model] [INFO] Applying SMOTE to balance training data
+[2026-04-09 17:41:03,273] [phase1.train_model] [INFO] After SMOTE -> Negative: 3420, Positive: 3420
+[2026-04-09 17:41:03,273] [phase1.train_model] [INFO] Using scale_pos_weight = 1.00
+[2026-04-09 17:41:03,273] [phase1.train_model] [INFO] Initializing XGBoost model
+[2026-04-09 17:41:03,274] [phase1.train_model] [INFO] Training XGBoost model
+[2026-04-09 17:41:05,753] [phase1.train_model] [INFO] Validation metrics: {'accuracy': 0.827, 'auc': 0.9162008469449486, 'recall': 0.903448275862069, 'precision': 0.4517241379310345, 'f1_score': 0.6022988505747127}
+[2026-04-09 17:41:05,753] [phase1.train_model] [INFO] Confusion Matrix:
+[[696 159]
+ [ 14 131]]
+[2026-04-09 17:41:05,756] [phase1.train_model] [INFO] Saved model to /Users/sanidhya/Documents/Projects/M.Tech Project/BANKING_XAI_PROJECT/artifacts/xgboost_model.joblib
