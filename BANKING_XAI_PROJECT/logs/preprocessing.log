@@ -514,3 +514,37 @@ Charged Off             61
 [2026-04-09 17:43:13,231] [phase1.preprocessing] [INFO] Converting issue_month into date features
 [2026-04-09 17:43:13,238] [phase1.preprocessing] [INFO] Dropped 0 rows with missing target.
 [2026-04-09 17:43:13,238] [phase1.preprocessing] [INFO] Final cleaned dataframe shape: (5000, 62)
+[2026-04-09 17:49:32,287] [phase1.preprocessing] [INFO] Starting basic cleaning
+[2026-04-09 17:49:32,289] [phase1.preprocessing] [INFO] Loan status value counts BEFORE encoding:
+[2026-04-09 17:49:32,290] [phase1.preprocessing] [INFO] loan_status
+Current               3775
+Fully Paid             500
+Late (16-30 days)      495
+Late (31-120 days)     169
+Charged Off             61
+[2026-04-09 17:49:32,290] [phase1.preprocessing] [INFO] Loan status value counts AFTER encoding (0=good, 1=bad):
+[2026-04-09 17:49:32,291] [phase1.preprocessing] [INFO] loan_status
+0    4275
+1     725
+[2026-04-09 17:49:32,291] [phase1.preprocessing] [INFO] Dropping leakage columns: ['balance', 'paid_total', 'paid_principal', 'paid_interest', 'paid_late_fees']
+[2026-04-09 17:49:32,291] [phase1.preprocessing] [INFO] Dropping high-cardinality columns: ['emp_title']
+[2026-04-09 17:49:32,294] [phase1.preprocessing] [INFO] Converting issue_month into date features
+[2026-04-09 17:49:32,302] [phase1.preprocessing] [INFO] Dropped 0 rows with missing target.
+[2026-04-09 17:49:32,302] [phase1.preprocessing] [INFO] Final cleaned dataframe shape: (5000, 62)
+[2026-04-09 17:50:10,643] [phase1.preprocessing] [INFO] Starting basic cleaning
+[2026-04-09 17:50:10,643] [phase1.preprocessing] [INFO] Loan status value counts BEFORE encoding:
+[2026-04-09 17:50:10,644] [phase1.preprocessing] [INFO] loan_status
+Current               3775
+Fully Paid             500
+Late (16-30 days)      495
+Late (31-120 days)     169
+Charged Off             61
+[2026-04-09 17:50:10,644] [phase1.preprocessing] [INFO] Loan status value counts AFTER encoding (0=good, 1=bad):
+[2026-04-09 17:50:10,644] [phase1.preprocessing] [INFO] loan_status
+0    4275
+1     725
+[2026-04-09 17:50:10,644] [phase1.preprocessing] [INFO] Dropping leakage columns: ['balance', 'paid_total', 'paid_principal', 'paid_interest', 'paid_late_fees']
+[2026-04-09 17:50:10,645] [phase1.preprocessing] [INFO] Dropping high-cardinality columns: ['emp_title']
+[2026-04-09 17:50:10,647] [phase1.preprocessing] [INFO] Converting issue_month into date features
+[2026-04-09 17:50:10,653] [phase1.preprocessing] [INFO] Dropped 0 rows with missing target.
+[2026-04-09 17:50:10,653] [phase1.preprocessing] [INFO] Final cleaned dataframe shape: (5000, 62)
