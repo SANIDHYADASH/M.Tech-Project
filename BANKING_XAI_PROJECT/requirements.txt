@@ -1,7 +1,10 @@
 streamlit
+plotly
+scikit-learn
+shap
+fairlearn
 tensorflow
 lime
-fairlearn
 dice-ml
 evidently
 shap

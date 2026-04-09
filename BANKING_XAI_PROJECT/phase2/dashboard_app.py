@@ -9,6 +9,10 @@ import numpy as np
 import joblib
 import plotly.express as px
 import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+import shap
 from tensorflow.keras.models import load_model
 
 from phase1.feature_engineering import add_domain_features
@@ -120,7 +124,7 @@ if uploaded:
         )
     else:
         prediction_df["Final Hybrid Risk Score"] = prediction_df["XGBoost Risk Score"]
-
+        
     # ---------------------------------------------------------
     # Risk Categorization
     # ---------------------------------------------------------
@@ -151,7 +155,7 @@ if uploaded:
     col4.metric("Low Risk Accounts", low_risk)
 
     # ---------------------------------------------------------
-    # Charts
+    # Risk Distribution
     # ---------------------------------------------------------
     st.subheader("Risk Distribution")
 
@@ -164,15 +168,266 @@ if uploaded:
         values="Count",
         title="Portfolio Risk Composition"
     )
-    st.plotly_chart(fig_pie, use_container_width=True)
+    st.plotly_chart(fig_pie, use_container_width=True, key="risk_distribution_pie")
 
     fig_hist = px.histogram(
         prediction_df,
         x="Final Hybrid Risk Score",
         nbins=30,
+        color="Risk Category",
         title="Final Risk Score Distribution"
     )
-    st.plotly_chart(fig_hist, use_container_width=True)
+    st.plotly_chart(fig_hist, use_container_width=True, key="risk_distribution_hist")
+
+    # ---------------------------------------------------------
+    # Customer Segmentation Module
+    # ---------------------------------------------------------
+    st.subheader("Customer Segmentation Analysis")
+
+    cluster_features = [
+        col for col in [
+            "annual_income",
+            "loan_amount",
+            "debt_to_income",
+            "total_credit_utilization_ratio",
+            "delinq_2y"
+        ] if col in prediction_df.columns
+    ]
+
+    if len(cluster_features) >= 3:
+        cluster_df = prediction_df[cluster_features].fillna(0)
+
+        scaler = StandardScaler()
+        scaled_data = scaler.fit_transform(cluster_df)
+
+        kmeans = KMeans(n_clusters=4, random_state=42)
+        prediction_df["Customer Segment"] = kmeans.fit_predict(scaled_data)
+
+        fig_cluster = px.scatter(
+            prediction_df,
+            x="annual_income",
+            y="loan_amount",
+            color=prediction_df["Customer Segment"].astype(str),
+            size=np.clip(prediction_df["Final Hybrid Risk Score"], 0.01, None),
+            title="Customer Segmentation"
+        )
+        st.plotly_chart(fig_cluster, use_container_width=True, key="customer_segmentation_chart")
+
+    # ---------------------------------------------------------
+    # Geographic Risk Analysis
+    # ---------------------------------------------------------
+    if "state" in prediction_df.columns:
+        st.subheader("Geographic Risk Analysis")
+
+        state_risk = (
+            prediction_df.groupby("state")["Final Hybrid Risk Score"]
+            .mean()
+            .reset_index()
+            .sort_values(by="Final Hybrid Risk Score", ascending=False)
+        )
+
+        fig_state = px.bar(
+            state_risk,
+            x="state",
+            y="Final Hybrid Risk Score",
+            title="Average Risk Score by State"
+        )
+        st.plotly_chart(fig_state, use_container_width=True, key="state_risk_chart")
+
+    # ---------------------------------------------------------
+    # Grade-wise Risk Analysis
+    # ---------------------------------------------------------
+    if "grade" in prediction_df.columns:
+        st.subheader("Loan Grade Risk Analysis")
+
+        grade_risk = (
+            prediction_df.groupby("grade")["Final Hybrid Risk Score"]
+            .mean()
+            .reset_index()
+        )
+
+        fig_grade = px.bar(
+            grade_risk,
+            x="grade",
+            y="Final Hybrid Risk Score",
+            color="Final Hybrid Risk Score",
+            title="Average Risk Score by Loan Grade"
+        )
+        st.plotly_chart(fig_grade, use_container_width=True, key="grade_risk_chart")
+    
+    # ---------------------------------------------------------
+    # Income vs Risk Analysis
+    # ---------------------------------------------------------
+    st.subheader("Income vs Risk Analysis")
+
+    fig_income = px.scatter(
+        prediction_df,
+        x="annual_income",
+        y="Final Hybrid Risk Score",
+        color="Risk Category",
+        title="Income vs Final Risk Score"
+    )
+
+    st.plotly_chart(fig_income, use_container_width=True, key="income_risk_chart")
+
+    # ---------------------------------------------------------
+    # Monthly Trend Analysis
+    # ---------------------------------------------------------
+
+    if "issue_year" in prediction_df.columns and "issue_month_num" in prediction_df.columns:
+        st.subheader("Monthly Risk Trend")
+
+        monthly_risk = (
+            prediction_df.groupby(["issue_year", "issue_month_num"])["Final Hybrid Risk Score"]
+            .mean()
+            .reset_index()
+        )
+
+        monthly_risk["period"] = (
+            monthly_risk["issue_year"].astype(str) + "-" +
+            monthly_risk["issue_month_num"].astype(str)
+        )
+
+        fig_month = px.line(
+            monthly_risk,
+            x="period",
+            y="Final Hybrid Risk Score",
+            title="Monthly Average Risk Trend"
+        )
+
+        st.plotly_chart(fig_month, use_container_width=True, key="monthly_risk_chart")
+
+    # ---------------------------------------------------------
+    # What-If Scenario Simulator
+    # ---------------------------------------------------------
+    st.subheader("What-If Risk Simulation")
+
+    sim_income = st.slider("Annual Income", 20000, 200000, 50000)
+    sim_loan = st.slider("Loan Amount", 1000, 50000, 10000)
+    sim_dti = st.slider("Debt To Income", 1, 60, 20)
+    sim_interest = st.slider("Interest Rate", 5, 30, 12)
+
+    simulated_score = (
+        (sim_loan / 50000) * 0.3 +
+        (sim_dti / 60) * 0.3 +
+        (sim_interest / 30) * 0.2 +
+        (1 - sim_income / 200000) * 0.2
+    )
+
+    st.metric("Simulated Risk Score", round(simulated_score, 3))
+
+    # ---------------------------------------------------------
+    # Early Warning Triggers
+    # ---------------------------------------------------------
+    st.subheader("Early Warning Trigger Rules")
+
+    warning_df = prediction_df[
+        (prediction_df["Final Hybrid Risk Score"] > 0.7) |
+        (prediction_df["debt_to_income"] > 35) |
+        (prediction_df["delinq_2y"] > 1)
+    ]
+
+    st.write(f"Accounts Requiring Manual Review: {len(warning_df)}")
+    # st.dataframe(warning_df.head(20))
+    st.dataframe(warning_df)
+
+    # ---------------------------------------------------------
+    # Portfolio Health Score
+    # ---------------------------------------------------------
+    st.subheader("Portfolio Health Index")
+
+    high_risk_percentage = (high_risk / total_accounts) * 100
+    avg_dti = prediction_df["debt_to_income"].mean()
+    avg_util = prediction_df["total_credit_utilization_ratio"].mean() * 100
+
+    delinquency_rate = (
+        len(prediction_df[prediction_df["Risk Category"] == "High Risk"]) /
+        total_accounts
+    ) * 100
+
+    portfolio_health = 100 - (
+        high_risk_percentage * 0.5 +
+        avg_dti * 0.2 +
+        avg_util * 0.2 +
+        delinquency_rate * 0.1
+    )
+
+    portfolio_health = max(0, min(100, portfolio_health))
+
+    st.metric("Portfolio Health Score", round(portfolio_health, 2))
+
+    if portfolio_health > 75:
+        st.success("Healthy Portfolio")
+    elif portfolio_health > 50:
+        st.warning("Moderate Risk Portfolio")
+    else:
+        st.error("High Stress Portfolio")
+
+    # ---------------------------------------------------------
+    # SHAP Explainability in Dashboard
+    # ---------------------------------------------------------
+    st.subheader("Model Explainability")
+
+    explainer = shap.TreeExplainer(xgb_model)
+    shap_values = explainer.shap_values(transformed_data[:100])
+
+    st.write("Top Features Driving Delinquency Predictions")
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    shap.summary_plot(
+        shap_values,
+        transformed_data[:100],
+        show=False
+    )
+
+    st.pyplot(fig)
+    plt.close(fig)
+
+    # ---------------------------------------------------------
+    # Fairness Analysis
+    # ---------------------------------------------------------
+    if "homeownership" in prediction_df.columns:
+        st.subheader("Fairness Analysis")
+
+        fairness_df = (
+            prediction_df.groupby("homeownership")["Final Hybrid Risk Score"]
+            .mean()
+            .reset_index()
+        )
+
+        fig_fairness = px.bar(
+            fairness_df,
+            x="homeownership",
+            y="Final Hybrid Risk Score",
+            title="Average Risk Score by Homeownership"
+        )
+
+        st.plotly_chart(fig_fairness, use_container_width=True, key="fairness_chart")
+
+    # ---------------------------------------------------------
+    # Charts
+    # ---------------------------------------------------------
+    st.subheader("Risk Distribution")
+
+    risk_counts = prediction_df["Risk Category"].value_counts().reset_index()
+    risk_counts.columns = ["Risk Category", "Count"]
+
+    # fig_pie = px.pie(
+    #     risk_counts,
+    #     names="Risk Category",
+    #     values="Count",
+    #     title="Portfolio Risk Composition"
+    # )
+    # st.plotly_chart(fig_pie, use_container_width=True, key="risk_distribution_pie")
+
+    # fig_hist = px.histogram(
+    #     prediction_df,
+    #     x="Final Hybrid Risk Score",
+    #     nbins=30,
+    #     title="Final Risk Score Distribution"
+    # )
+    # st.plotly_chart(fig_hist, use_container_width=True, key="risk_distribution_hist")
 
     # ---------------------------------------------------------
     # High Risk Accounts Table
@@ -220,7 +475,7 @@ if uploaded:
             y="Final Hybrid Risk Score",
             title="Average Risk by Loan Purpose"
         )
-        st.plotly_chart(fig_purpose, use_container_width=True)
+        st.plotly_chart(fig_purpose, use_container_width=True, key="loan_purpose_chart")
 
     # ---------------------------------------------------------
     # Recommendations
