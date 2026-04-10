@@ -27,6 +27,12 @@ def encode_loan_status(df: pd.DataFrame) -> pd.DataFrame:
     if TARGET_COLUMN not in df.columns:
         raise KeyError(f"Target column '{TARGET_COLUMN}' not found in data.")
 
+    # Skip re-encoding if already numeric
+    if pd.api.types.is_numeric_dtype(df[TARGET_COLUMN]):
+        logger.info("loan_status already encoded. Skipping re-encoding.")
+        logger.info(df[TARGET_COLUMN].value_counts(dropna=False).to_string())
+        return df
+
     status = df[TARGET_COLUMN].astype(str).str.strip()
 
     bad_statuses = {
@@ -38,12 +44,14 @@ def encode_loan_status(df: pd.DataFrame) -> pd.DataFrame:
     }
 
     logger.info("Loan status value counts BEFORE encoding:")
-    logger.info(status.value_counts().to_string())
+    logger.info(status.value_counts(dropna=False).to_string())
 
-    df[TARGET_COLUMN] = status.isin(bad_statuses).astype(int)
+    df[TARGET_COLUMN] = status.apply(
+        lambda x: 1 if str(x).strip() in bad_statuses else 0
+    )
 
     logger.info("Loan status value counts AFTER encoding (0=good, 1=bad):")
-    logger.info(df[TARGET_COLUMN].value_counts().to_string())
+    logger.info(df[TARGET_COLUMN].value_counts(dropna=False).to_string())
 
     return df
 
@@ -60,8 +68,18 @@ def basic_cleaning(df: pd.DataFrame) -> pd.DataFrame:
     """
     logger.info("Starting basic cleaning")
 
-    # Encode target
-    df = encode_loan_status(df)
+    df = df.copy()
+
+    # -----------------------------------------
+    # Replace string placeholders like 'NA'
+    # -----------------------------------------
+    df = df.replace(["NA", "", "null", "None"], np.nan)
+
+    # -----------------------------------------
+    # Encode target safely
+    # -----------------------------------------
+    if TARGET_COLUMN in df.columns:
+        df = encode_loan_status(df)
 
     # -----------------------------------------
     # Drop only true leakage columns
@@ -135,7 +153,19 @@ def basic_cleaning(df: pd.DataFrame) -> pd.DataFrame:
         "loan_amount",
         "term",
         "interest_rate",
-        "installment"
+        "installment",
+        "emi_to_income_ratio",
+        "total_credit_utilization_ratio",
+        "avg_debit_limit_per_active_account",
+        "credit_history_length_years",
+        "open_credit_ratio",
+        "cc_carrying_balance_ratio",
+        "installment_burden_ratio",
+        "delinquency_score",
+        "bankruptcy_or_tax_issue",
+        "recent_inquiry_risk",
+        "issue_year",
+        "issue_month_num"
     ]
 
     for col in numeric_conversion_cols:
@@ -148,30 +178,28 @@ def basic_cleaning(df: pd.DataFrame) -> pd.DataFrame:
     if "issue_month" in df.columns:
         logger.info("Converting issue_month into date features")
 
-        df["issue_month"] = pd.to_datetime(
-            df["issue_month"],
-            format="%b-%Y",
-            errors="coerce"
-        )
+        if not pd.api.types.is_datetime64_any_dtype(df["issue_month"]):
+            df["issue_month"] = pd.to_datetime(
+                df["issue_month"],
+                format="%b-%Y",
+                errors="coerce"
+            )
 
         df["issue_year"] = df["issue_month"].dt.year
         df["issue_month_num"] = df["issue_month"].dt.month
 
     # -----------------------------------------
-    # Replace string placeholders like 'NA'
-    # -----------------------------------------
-    df = df.replace(["NA", "", "null", "None"], np.nan)
-
-    # -----------------------------------------
     # Drop rows with missing target
     # -----------------------------------------
-    before = df.shape[0]
+    if TARGET_COLUMN in df.columns:
+        before = df.shape[0]
 
-    df = df.dropna(subset=[TARGET_COLUMN])
+        df = df.dropna(subset=[TARGET_COLUMN])
 
-    after = df.shape[0]
+        after = df.shape[0]
 
-    logger.info(f"Dropped {before - after} rows with missing target.")
+        logger.info(f"Dropped {before - after} rows with missing target.")
+
     logger.info(f"Final cleaned dataframe shape: {df.shape}")
 
     return df
@@ -228,10 +256,6 @@ def build_preprocessor(X: pd.DataFrame) -> Tuple[ColumnTransformer, List[str], L
 def preprocess_and_split(df: pd.DataFrame):
     """
     Full preprocessing: clean, split, and build ColumnTransformer.
-
-    Returns:
-        X_train_trans, X_test_trans, y_train, y_test,
-        preprocessor, numeric_features, categorical_features
     """
     df = df.replace({pd.NA: np.nan})
 
