@@ -5,7 +5,7 @@ from pathlib import Path
 # Base paths
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR.parent / "data" / "raw"
-ARTIFACTS_DIR = BASE_DIR.parent / "artifacts"
+ARTIFACTS_DIR = BASE_DIR.parent / "models"
 LOG_DIR = BASE_DIR.parent / "logs"
 
 # Data config

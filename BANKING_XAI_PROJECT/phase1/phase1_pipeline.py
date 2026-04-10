@@ -53,7 +53,7 @@ def run_phase1():
     compute_shap_values(model, X_test_for_shap, feature_names=feature_names)
 
     logger.info("==== Phase-1 Pipeline completed successfully ====")
-    joblib.dump(preprocessor, "artifacts/preprocessor.joblib")
+    joblib.dump(preprocessor, "models/preprocessor.joblib")
     # Return objects for Phase-2 integration
     return {
         "df": df_fe,

@@ -16,4 +16,4 @@ def explain_with_lime(model, X_train, X_test, feature_names):
         num_features=10
     )
 
-    explanation.save_to_file('artifacts/lime/lime_explanation.html')
+    explanation.save_to_file('models/lime/lime_explanation.html')
