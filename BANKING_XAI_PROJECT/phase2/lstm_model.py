@@ -1,31 +1,38 @@
 # lstm_model.py
 
-from tensorflow.keras import Sequential
-from tensorflow.keras.layers import LSTM, Dense, Dropout
-from phase2.config import LSTM_UNITS, DROPOUT
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout, Input
+from phase2.config import DROPOUT
 
 
 def build_lstm_model(input_shape):
     """
-    Build LSTM model for loan delinquency prediction.
+    Smaller and more stable LSTM model for
+    loan delinquency sequence prediction.
     """
 
     model = Sequential()
 
+    model.add(Input(shape=input_shape))
+
     model.add(
         LSTM(
-            LSTM_UNITS,
-            return_sequences=True,
-            input_shape=input_shape
+            64,
+            return_sequences=True
         )
     )
 
     model.add(Dropout(DROPOUT))
 
-    model.add(LSTM(64))
+    model.add(
+        LSTM(
+            32
+        )
+    )
+
     model.add(Dropout(0.2))
 
-    model.add(Dense(32, activation="relu"))
+    model.add(Dense(16, activation="relu"))
     model.add(Dense(1, activation="sigmoid"))
 
     model.compile(
