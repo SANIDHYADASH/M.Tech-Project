@@ -13,14 +13,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 import shap
-
-# Try to import TensorFlow, but make it optional
-try:
-    from tensorflow.keras.models import load_model
-    TENSORFLOW_AVAILABLE = True
-except ImportError:
-    TENSORFLOW_AVAILABLE = False
-    load_model = None
+from tensorflow.keras.models import load_model
 
 from phase1.feature_engineering import add_domain_features
 from phase1.preprocessing import basic_cleaning
@@ -41,15 +34,12 @@ st.set_page_config(
 # ---------------------------------------------------------
 @st.cache_resource
 def load_artifacts():
-    base_path = os.path.join(os.path.dirname(__file__), "..")
-    xgb_model = joblib.load(os.path.join(base_path, "models", "xgboost_model.joblib"))
-    preprocessor = joblib.load(os.path.join(base_path, "models", "preprocessor.joblib"))
+    xgb_model = joblib.load("models/xgboost_model.joblib")
+    preprocessor = joblib.load("models/preprocessor.joblib")
 
     lstm_model = None
-    if TENSORFLOW_AVAILABLE:
-        lstm_path = os.path.join(base_path, "models", "lstm_model.keras")
-        if os.path.exists(lstm_path):
-            lstm_model = load_model(lstm_path)
+    if os.path.exists("models/lstm_model.keras"):
+        lstm_model = load_model("models/lstm_model.keras")
 
     return xgb_model, preprocessor, lstm_model
 
