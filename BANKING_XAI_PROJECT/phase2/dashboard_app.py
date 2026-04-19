@@ -34,12 +34,14 @@ st.set_page_config(
 # ---------------------------------------------------------
 @st.cache_resource
 def load_artifacts():
-    xgb_model = joblib.load("models/xgboost_model.joblib")
-    preprocessor = joblib.load("models/preprocessor.joblib")
+    base_path = os.path.join(os.path.dirname(__file__), "..")
+    xgb_model = joblib.load(os.path.join(base_path, "models", "xgboost_model.joblib"))
+    preprocessor = joblib.load(os.path.join(base_path, "models", "preprocessor.joblib"))
 
     lstm_model = None
-    if os.path.exists("models/lstm_model.keras"):
-        lstm_model = load_model("models/lstm_model.keras")
+    lstm_path = os.path.join(base_path, "models", "lstm_model.keras")
+    if os.path.exists(lstm_path):
+        lstm_model = load_model(lstm_path)
 
     return xgb_model, preprocessor, lstm_model
 
