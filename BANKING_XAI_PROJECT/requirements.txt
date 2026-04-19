@@ -1,11 +1,14 @@
 streamlit
+pandas
+numpy
 plotly
+matplotlib
 scikit-learn
+joblib
 shap
 fairlearn
 tensorflow
 lime
 dice-ml
 evidently
-shap
 imbalanced-learn
