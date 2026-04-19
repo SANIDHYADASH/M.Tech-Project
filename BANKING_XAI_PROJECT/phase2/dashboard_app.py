@@ -17,6 +17,7 @@ from tensorflow.keras.models import load_model
 
 from phase1.feature_engineering import add_domain_features
 from phase1.preprocessing import basic_cleaning
+from phase2.config import SEQ_LENGTH, SEQUENCE_FEATURES
 from phase2.sequence_builder import build_sequences
 
 # ---------------------------------------------------------
@@ -101,27 +102,42 @@ if uploaded:
     # Phase-2 LSTM Predictions
     # ---------------------------------------------------------
     if lstm_model is not None:
-        feature_cols = [col for col in df.columns if col != "loan_status"]
+        sequence_features = [col for col in SEQUENCE_FEATURES if col in df.columns]
+        missing_features = [col for col in SEQUENCE_FEATURES if col not in df.columns]
 
-        X_seq, y_seq = build_sequences(
-            df,
-            feature_cols=feature_cols,
-            target_col="loan_status" if "loan_status" in df.columns else feature_cols[0]
-        )
+        if missing_features:
+            st.warning(
+                "Uploaded data is missing required LSTM features. "
+                "Skipping LSTM predictions for this upload."
+            )
+            st.write("Missing features:", missing_features)
 
-        lstm_preds = lstm_model.predict(X_seq).flatten()
+        if len(sequence_features) == len(SEQUENCE_FEATURES):
+            X_seq, _ = build_sequences(
+                df,
+                feature_cols=sequence_features,
+                target_col="loan_status" if target_present else None,
+                seq_length=SEQ_LENGTH
+            )
 
-        padded_lstm_preds = np.concatenate([
-            np.full(6, np.nan),
-            lstm_preds
-        ])
+            if X_seq.shape[0] > 0:
+                lstm_preds = lstm_model.predict(X_seq).flatten()
 
-        prediction_df["LSTM Risk Score"] = padded_lstm_preds[:len(prediction_df)]
+                padded_lstm_preds = np.concatenate([
+                    np.full(SEQ_LENGTH, np.nan),
+                    lstm_preds
+                ])
 
-        prediction_df["Final Hybrid Risk Score"] = (
-            0.7 * prediction_df["XGBoost Risk Score"] +
-            0.3 * prediction_df["LSTM Risk Score"].fillna(prediction_df["XGBoost Risk Score"])
-        )
+                prediction_df["LSTM Risk Score"] = padded_lstm_preds[:len(prediction_df)]
+                prediction_df["Final Hybrid Risk Score"] = (
+                    0.7 * prediction_df["XGBoost Risk Score"] +
+                    0.3 * prediction_df["LSTM Risk Score"].fillna(prediction_df["XGBoost Risk Score"])
+                )
+            else:
+                st.warning("Not enough rows to build LSTM sequences. Using XGBoost score only.")
+                prediction_df["Final Hybrid Risk Score"] = prediction_df["XGBoost Risk Score"]
+        else:
+            prediction_df["Final Hybrid Risk Score"] = prediction_df["XGBoost Risk Score"]
     else:
         prediction_df["Final Hybrid Risk Score"] = prediction_df["XGBoost Risk Score"]
         
