@@ -7,7 +7,6 @@ scikit-learn
 joblib
 shap
 fairlearn
-tensorflow
 lime
 dice-ml
 evidently
